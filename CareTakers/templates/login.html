@@ -1,0 +1,115 @@
+{% extends 'base2.html' %}
+{% block style %}
+    .card {
+    padding: 30px 40px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+        border: none !important;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
+    }
+
+    .blue-text {
+        color: #00BCD4
+    }
+
+    .form-control-label {
+        margin-bottom: 0
+    }
+    .admit_doctor{
+        margin:5px 0px 0px 0px;
+        padding:10px 8px;
+        width:250px;
+        text-align:center;
+        border-radius:5px;
+        color: #00BCD4;
+    }
+    input,
+    textarea,
+    button {
+        padding: 8px 15px;
+        border-radius: 5px !important;
+        margin: 5px 0px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        font-size: 18px !important;
+        font-weight: 300
+    }
+
+    input:focus,
+    textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid #00BCD4;
+        outline-width: 0;
+        font-weight: 400
+    }
+
+    .btn-block {
+        text-transform: uppercase;
+        font-size: 15px !important;
+        font-weight: 400;
+        height: 43px;
+        cursor: pointer
+    }
+
+    .btn-block:hover {
+        color: #fff !important
+    }
+
+    button:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        outline-width: 0
+    }
+    .msgbody
+    {
+        text-align:center;
+    }
+
+{% endblock style %}
+
+{% block content %}
+
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h3>
+                  Login into our Site
+                </h3>
+                <p class="blue-text">Fill the following form to reach us and request an appointment</p>
+                <div class="card">
+                    
+                    <form class="form-card" method="POST" action="">
+                    {% csrf_token %}
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">Username<span class="text-danger"> *</span>
+                            </label> 
+                            <input required type="text" id="fname" name="loginusername" placeholder="Enter your first name" onblur="validate(1)"> 
+                        </div>
+
+                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">Password<span class="text-danger"> *</span></label> 
+                            <input required type="password" id="lname" name="pass1" placeholder="Enter your last name" onblur="validate(2)"> 
+                        </div>
+
+                        </div>
+
+                        
+                        <div class="row">
+                        <!-- <div class="justify-content-start"> -->
+                            
+                        <!-- </div> -->
+                        <!-- <div class=" justify-content-end"> -->
+                            <div class="form-group col-sm-6 flex-column d-flex"> <button type="submit" class="btn-block btn-primary">Send</button> </div>
+                        </div>
+                        <!-- </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

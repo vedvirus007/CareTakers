@@ -1,0 +1,39 @@
+$blue : lightblue;
+$yellow: lightyellow;
+
+*{
+font-family: 'Alegreya', serif;
+}
+
+.header img {
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+
+hr {
+  display: block;
+  color: $blue;
+}
+
+form{
+  font-size: 15px;
+}
+
+h2,h3{
+  font-style: bold;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+th,tr{
+  font-size: 18px;
+}
+
+th{
+  background: $blue;
+}
+
+tr{
+  background: $yellow;
+}

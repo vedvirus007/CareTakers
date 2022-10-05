@@ -1,0 +1,317 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% block style %}
+    .card {
+    padding: 30px 40px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+        border: none !important;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
+    }
+
+    .blue-text {
+        color: #00BCD4
+    }
+
+    .form-control-label {
+        margin-bottom: 0
+    }
+    .admit doctor{
+        margin:5px 0px 0px 0px;
+        padding:10px 8px;
+        width:250px;
+        text-align:center;
+        border-radius:5px;
+        color: #00BCD4;
+    }
+    input,
+    textarea,
+    button {
+        padding: 8px 15px;
+        border-radius: 5px !important;
+        margin: 5px 0px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        font-size: 18px !important;
+        font-weight: 300
+    }
+
+    input:focus,
+    textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid #00BCD4;
+        outline-width: 0;
+        font-weight: 400
+    }
+
+    .btn-block {
+        text-transform: uppercase;
+        font-size: 15px !important;
+        font-weight: 400;
+        height: 43px;
+        cursor: pointer
+    }
+
+    .btn-block:hover {
+        color: #fff !important
+    }
+
+    button:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        outline-width: 0
+    }
+    .msgbody
+    {
+        text-align:center;
+    }
+
+ 
+
+{% endblock style %}
+
+{% block content %}
+
+    {% if messages %}
+    <div class="card notification-card notification-invitation">
+        <div class="card-body">
+        {% for message in messages %}
+            <div class="card-title msgbody">{{message}} </div>
+        {% endfor %}
+        </div>
+      </div> 
+    {% else %}
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h3>
+                   Make a pre-screening test
+                </h3>
+                <p class="blue-text">Fill the following form to predict your disease</p>
+                <div class="card">
+                    
+                    <form class="form-card" method="POST" action="">
+                    {% csrf_token %}
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">First name<span class="text-danger"> *</span>
+                            </label> 
+                            <input required type="text" id="fname" name="fname" placeholder="Enter your first name" onblur="validate(1)"> 
+                        </div>
+
+                        <div class="form-group col-sm-6 flex-column d-flex"> 
+                            <label class="form-control-label px-3">Last name<span class="text-danger"> *</span></label> 
+                            <input required type="text" id="lname" name="lname" placeholder="Enter your last name" onblur="validate(2)"> 
+                        </div>
+
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Email<span class="text-danger"> *</span>
+                                </label> 
+                                <input type="text" id="email" name="email" placeholder="" onblur="validate(3)"> 
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column d-flex"> 
+                             <label class="form-control-label px-3">Phone number<span class="text-danger"> *</span></label> 
+                              <input type="text" id="mob" name="mobile" placeholder="" onblur="validate(4)"> 
+                            </div>
+
+                        </div>
+
+                        <div class="wrapper">
+                            <div class="search-input ">
+                              <a href="" target=" blank" hidden></a>
+                              <input type="text" class="" placeholder="Type to search..">
+                              <div class="autocom-box">
+                                <!-- here list are inserted from javascript -->
+                              </div>
+                             
+                              <div class="icon"><i class="fas fa-search"></i></div>
+                            </div>
+                            <!-- <div>
+                              <input type="text" class="textF" name="" id="">
+                          </div> -->
+                          </div>
+                      
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-12 flex-column d-flex"> 
+                                <label class="form-control-label px-3">Symptoms<span class="text-danger"> *</span></label> 
+                                <textarea type="text" class="textF" id="ans" name="request" placeholder="" onblur="validate(5)"></textarea> 
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                        
+                            <div class="form-group col-sm-6 flex-column d-flex"> <button type="submit" class="btn-block btn-primary">Send</button> </div>
+                        </div>
+                        <!-- </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let suggestions = [
+        "Itching","Skin Rash","Nodal Skin Eruptions","Continuous Sneezing",	"Shivering","Chills", "Joint Pain",	"Stomach Pain", "Acidity", "Ulcers On Tongue",	"Muscle Wasting", "Vomiting", "Burning Micturition", "Spotting  Urination", "Fatigue", "Weight Gain",	"Anxiety",	"Cold Hands And Feets", "Mood Swings",	"Weight Loss",	"Restlessness",	"Lethargy", "Patches In Throat",	"Irregular Sugar Level",	"Cough",	"High Fever",	"Sunken Eyes",	"Breathlessness",	"Sweating",	"Dehydration",	"Indigestion",	"Headache",	"Yellowish Skin",	"Dark Urine",	"Nausea",	"Loss Of Appetite",	"Pain Behind The Eyes",	"Back Pain", 	"Constipation",	"Abdominal Pain",	"Diarrhoea",	"Mild Fever", "Yellow Urine",	"Yellowing Of Eyes",	"Acute Liver Failure",	"Fluid Overload",	"Swelling Of Stomach",	"Swelled Lymph Nodes",	"Malaise",	"Blurred And Distorted Vision",	"Phlegm",	"Throat Irritation",	"Redness Of Eyes",	"Sinus Pressure",	"Runny Nose",	"Congestion",	"Chest Pain",	"Weakness In Limbs",	"Fast Heart Rate",	"Pain During Bowel Movements",	"Pain In Anal Region",	"Bloody Stool",	"Irritation In Anus",	"Neck Pain","Dizziness",	"Cramps",	"Bruising",	"Obesity",	"Swollen Legs",	"Swollen Blood Vessels",	"Puffy Face And Eyes",	"Enlarged Thyroid",	"Brittle Nails",	"Swollen Extremeties",	"Excessive Hunger",	"Extra Marital Contacts",	"Drying And Tingling Lips",	"Slurred Speech",	"Knee Pain",	"Hip Joint Pain","Muscle Weakness",	"Stiff Neck",	"Swelling Joints",	"Movement Stiffness",	"Spinning Movements",	"Loss Of Balance",	"Unsteadiness",	"Weakness Of One Body Side",	"Loss Of Smell",	"Bladder Discomfort","Foul Smell Of Urine", "Continuous Feel Of Urine",	"Passage Of Gases",	"Internal Itching",	"Toxic Look (typhos)",	"Depression",	"Irritability",	"Muscle Pain",	"Altered Sensorium", "Red Spots Over Body",	"Belly Pain",	"Abnormal Menstruation",	"Dischromic  Patches",	"Watering From Eyes",	"Increased Appetite",	"Polyuria",	"Family History",	"Mucoid Sputum",	"Rusty Sputum",	"Lack Of Concentration",	"Visual Disturbances",	"Receiving Blood Transfusion",	"Receiving Unsterile Injections",	"Coma",	"Stomach Bleeding",	"Distention Of Abdomen",	"History Of Alcohol Consumption",	"Fluid Overload",	"Blood In Sputum",	"Prominent Veins On Calf",	"Palpitations",	"Painful Walking",	"Pus Filled Pimples",	"Blackheads",	"Scurring",	"Skin Peeling",	"Silver Like Dusting",	"Small Dents In Nails",	"Inflammatory Nails",	"Blister",	"Red Sore Around Nose",	"Yellow Crust Ooze",	"Prognosis"
+
+];
+const searchWrapper = document.querySelector(".search-input");
+const textF = document.querySelector(".textF");
+const inputBox = searchWrapper.querySelector("input");
+const suggBox = searchWrapper.querySelector(".autocom-box");
+const icon = searchWrapper.querySelector(".icon");
+let linkTag = searchWrapper.querySelector("a");
+let webLink;
+
+// if user press any key and release
+inputBox.onkeyup = (e)=>{
+    let userData = e.target.value; //user enetered data
+    let emptyArray = [];
+    if(userData){
+        icon.onclick = ()=>{
+            webLink = `https://www.google.com/search?q=${userData}`;
+            linkTag.setAttribute("href", webLink);
+            linkTag.click();
+        }
+        emptyArray = suggestions.filter((data)=>{
+            //filtering array value and user characters to lowercase and return only those words which are start with user enetered chars
+            return data.toLocaleLowerCase().startsWith(userData.toLocaleLowerCase());
+        });
+        emptyArray = emptyArray.map((data)=>{
+            // passing return data inside li tag
+            return data = `<li>${data}</li>`;
+        });
+        searchWrapper.classList.add("active"); //show autocomplete box
+        showSuggestions(emptyArray);
+        let allList = suggBox.querySelectorAll("li");
+        for (let i = 0; i < allList.length; i++) {
+            //adding onclick attribute in all li tag
+            allList[i].setAttribute("onclick", "select(this)");
+        }
+    }else{
+        searchWrapper.classList.remove("active"); //hide autocomplete box
+    }
+}
+let a=[]
+let arr=''
+function select(element){
+    let selectData = element.textContent;
+   
+    arr+=selectData+','
+    // arr = arr.substring(0, arr.length - 1);
+    inputBox.value = selectData;
+    a.push(selectData)
+    textF.value=arr;
+    icon.onclick = ()=>{
+        webLink = `https://www.google.com/search?q=${selectData}`;
+        linkTag.setAttribute("href", webLink);
+        linkTag.click();
+    }
+    searchWrapper.classList.remove("active");
+}
+console.log(a)
+function showSuggestions(list){
+    let listData;
+    if(!list.length){
+        userValue = inputBox.value;
+        listData = `<li>${userValue}</li>`;
+    }else{
+      listData = list.join('');
+    }
+    suggBox.innerHTML = listData;
+}
+    </script>
+    {% endif %}
+
+{% endblock content %}
+  
+  {% block script %}
+    function validate(val) {
+    v1 = document.getElementById("fname");
+    v2 = document.getElementById("lname");
+    v3 = document.getElementById("email");
+    v4 = document.getElementById("mob");
+    v5 = document.getElementById("job");
+    v6 = document.getElementById("ans");
+
+    flag1 = true;
+    flag2 = true;
+    flag3 = true;
+    flag4 = true;
+    flag5 = true;
+    flag6 = true;
+
+    if(val>=1 || val==0) {
+    if(v1.value == "") {
+    v1.style.borderColor = "red";
+    flag1 = false;
+    }
+    else {
+    v1.style.borderColor = "green";
+    flag1 = true;
+    }
+    }
+
+    if(val>=2 || val==0) {
+    if(v2.value == "") {
+    v2.style.borderColor = "red";
+    flag2 = false;
+    }
+    else {
+    v2.style.borderColor = "green";
+    flag2 = true;
+    }
+    }
+    if(val>=3 || val==0) {
+    if(v3.value == "") {
+    v3.style.borderColor = "red";
+    flag3 = false;
+    }
+    else {
+    v3.style.borderColor = "green";
+    flag3 = true;
+    }
+    }
+    if(val>=4 || val==0) {
+    if(v4.value == "") {
+    v4.style.borderColor = "red";
+    flag4 = false;
+    }
+    else {
+    v4.style.borderColor = "green";
+    flag4 = true;
+    }
+    }
+    if(val>=5 || val==0) {
+    if(v5.value == "") {
+    v5.style.borderColor = "red";
+    flag5 = false;
+    }
+    else {
+    v5.style.borderColor = "green";
+    flag5 = true;
+    }
+    }
+    if(val>=6 || val==0) {
+    if(v6.value == "") {
+    v6.style.borderColor = "red";
+    flag6 = false;
+    }
+    else {
+    v6.style.borderColor = "green";
+    flag6 = true;
+    }
+    }
+
+    flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6;
+
+    return flag;
+ }
+ {% endblock script %}
